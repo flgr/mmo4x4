@@ -1,9 +1,12 @@
 var nick = prompt("Your nick name, please?");
 
 $(window).load(function() {
+	console.info("Window load called");
 	var socket = io.connect('/');
 
-	socket.on('connection', function (data) {
+	socket.on('connect', function (data) {
+		console.info("Socket connected");
+
 		socket.on('client update', function(clients, changedClient) {
 			console.info('client update', clients);
 			var sortedNicks = Object.keys(clients).sort();
