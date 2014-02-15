@@ -11,26 +11,25 @@
 }
 
 .board {
-    width: 100%;
-    max-width: 33em;
+    width: 52em;
     margin: 0 auto;
 }
 
 .cell__block {
-    width: 8em;
-    height: 8em;
+    width: 4em;
+    height: 4em;
     display: inline-block;
-    background: #fff;
+    background: linear-gradient(to bottom, #ffffff 0, #f0f0f0 100%);
     border: 1px solid #ccc;
 
     @include breakpoint(small) {
-        width: 5em;
-        height: 5em;
+        width: 2.5em;
+        height: 2.5em;
     }
 }
 
 .cell--marked {
-    background: #ddd;
+    background: linear-gradient(to bottom, #dfdfdf 0, #d0d0d0 100%);
 }
 
 .list {

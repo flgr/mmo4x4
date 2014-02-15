@@ -10,7 +10,12 @@ $(window).load(function() {
 		socket.on('client update', function(clients, changedClient) {
 			console.info('client update', clients);
 			var sortedNicks = Object.keys(clients).sort();
-			$('#players').text(sortedNicks.join(", "));
+			$('#players').empty();
+
+			for (var i = 0; i < sortedNicks.length; i++) {
+				var sortedNick = sortedNicks[i];
+				$('<li/>', { class: 'player', text: sortedNick }).appendTo('#players');
+			}
 		});
 
 		socket.emit('join', { nick: nick });

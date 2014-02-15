@@ -5,7 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Bootstrap 101 Template</title>
+    <title>Connect 4 MMORPG</title>
+
+    <style>
+    	.sidebar {
+    		padding: 0;
+    		padding-top: 50px;
+    		background-color: #222;
+	    	position: absolute;
+	    	top: 0px;
+	    	right: 0px;
+	    	width: 200px;
+			margin-bottom: -99999px;
+			padding-bottom: 99999px;
+	    }
+
+	    #players {
+			list-style: none;
+	    	margin: 0;
+	    	padding: 0;
+	    }
+
+	    .player {
+	    	background-color: white;
+	    	border-radius: 4px;
+	    	padding: 4px;
+	    	margin: 8px;
+	    }
+    </style>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -75,9 +102,9 @@
     </section>
   </div>
 
-  <div class="g  small-one-whole  medium-one-whole  one-third">
-    <ul class="list  list--players" id="players">
-      <li class="list__item">Loading Players...</li>
+  <div class="g sidebar">
+    <ul id="players">
+      <li class="player">Loading...</li>
     </ul>
   </div>
 </div>
