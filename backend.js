@@ -16,21 +16,21 @@ function Server() {
     this.clients = {};
 }
 
-// changedClientNick can be null (in case of first client list push...)
 Server.prototype.pushClientUpdate = function(socket, changedClientNick) {
     socket.broadcast.emit("client update", this.clients, changedClientNick);
-}
+};
 
 Server.prototype.onClientJoin = function(socket, data) {
     this.clients[data.nick] = socket.client = { nick: data.nick };
-    console.info("Removed client " + socket.client.nick + " (" + socket.id + ")" +
+    console.info("Added client " + socket.client.nick + " (" + socket.id + ")" +
         ". Now have " + Object.keys(this.clients).length);
     this.pushClientUpdate(socket, socket.client.nick);
+    //socket.emit("client update", this.clients, null);
 };
 
 Server.prototype.onClientDisconnect = function(socket) {
     delete this.clients[socket.client.nick];
-    console.info("Adding client " + socket.client.nick + " (" + socket.id + ")" +
+    console.info("Removed client " + socket.client.nick + " (" + socket.id + ")" +
         ". Now have " + Object.keys(this.clients).length);    
     this.pushClientUpdate(socket, socket.client.nick);
 };
@@ -40,9 +40,6 @@ var server = new Server();
 io.sockets.on('connection', function(socket) {
     socket.on('join', function(data) {
         server.onClientJoin(socket, data);
-
-    	socket.emit('welcome');
-        server.pushClientUpdate(socket);
     });
 
     socket.on('disconnect', function() {
