@@ -1,15 +1,19 @@
 <html>
-  <body>
-	<script src="/socket.io/socket.io.js"></script>
+ 	<head>
+		<script src="/socket.io/socket.io.js"></script>
 
-	<script>
-	  var nick = prompt("Your nick name, please?");
+		<script>
+		    var nick = prompt("Your nick name, please?");
 
-	  var socket = io.connect('/');
+		    var socket = io.connect('/');
 
-	  socket.on('connect', function (data) {
-	    socket.emit('join', { nick: nick });
-	  });
-	</script>
-  </body>
+  		    socket.on('connect', function (data) {
+		    	socket.emit('join', { nick: nick });
+		  	});
+		</script>
+	</head>
+
+	<body>
+		<div id="clientList"></div>
+	</body>
 </html>
