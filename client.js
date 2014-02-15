@@ -31,7 +31,7 @@ $(window).load(function() {
 			}
 		});
 
-		socket.on('game update', function(games, changedGame) {
+		/*socket.on('game update', function(games, changedGame) {
 			console.info('game update', changedGame);
 			var gamesDiv = $('#games');
 
@@ -40,6 +40,28 @@ $(window).load(function() {
 			games.forEach(function(game) {
 				gamesDiv.append("<li class='game'><span class='glyphicon glyphicon-send'> </span> " + game.name + "</li>");
 			})
-		});
+		});*/
+
+        socket.on('game update', function(game) {
+            console.log('game update', game);
+
+            $('.board').empty();
+
+            for (var y = 0; y < game.height; y++) {
+                for (var x = 0; x < game.width; x++) {
+                    var classes = ['cell__block', 'cell'];
+
+                    if ((x+y%2) % 2 == 0) { classes.push('cell--marked'); }
+
+                    var tileMark = (game.board[x + "-" + y] || {}).nick;
+
+                    console.log(x, y, tileMark);
+
+                    $('<article/>', { class: classes.join(" "), text: tileMark }).appendTo('.board');
+                }
+
+                $('<br/>', {}).appendTo('.board');
+           }
+        });
 	});
 });
