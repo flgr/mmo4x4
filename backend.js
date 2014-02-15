@@ -12,21 +12,42 @@ var port = 1537;
 server.listen(port);
 util.log(util.format("Server ready at http://localhost:%d/", port))
 
-var clients = {};
+function Server() {
+    this.clients = {};
+}
+
+// changedClientNick can be null (in case of first client list push...)
+Server.prototype.pushClientUpdate = function(socket, changedClientNick) {
+    socket.broadcast.emit("client update", this.clients, changedClientNick);
+}
+
+Server.prototype.onClientJoin = function(socket, data) {
+    this.clients[data.nick] = socket.client = { nick: data.nick };
+    console.info("Removed client " + socket.client.nick + " (" + socket.id + ")" +
+        ". Now have " + Object.keys(this.clients).length);
+    this.pushClientUpdate(socket, socket.client.nick);
+};
+
+Server.prototype.onClientDisconnect = function(socket) {
+    delete this.clients[socket.client.nick];
+    console.info("Adding client " + socket.client.nick + " (" + socket.id + ")" +
+        ". Now have " + Object.keys(this.clients).length);    
+    this.pushClientUpdate(socket, socket.client.nick);
+};
+
+var server = new Server();
 
 io.sockets.on('connection', function(socket) {
     socket.on('join', function(data) {
-    	socket.client = { nick: data.nick };
-    	socket.emit('welcome', {});
+        server.onClientJoin(socket, data);
 
-    	clients[data.nick] = socket.client;
-        console.info("Adding client " + socket.client.nick + " (" + socket.id + ")" + ". Now have " + Object.keys(clients).length);
-        console.info(clients);
+    	socket.emit('welcome');
+        server.pushClientUpdate(socket);
     });
 
     socket.on('disconnect', function() {
     	if ("client" in socket) {
-	    	delete clients[socket.client.nick];
+            server.onClientDisconnect(socket);
 	    }
     });
 });
