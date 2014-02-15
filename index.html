@@ -11,13 +11,16 @@
     	.sidebar {
     		padding: 0;
     		padding-top: 50px;
+    		color: white;
     		background-color: #222;
 	    	position: absolute;
 	    	top: 0px;
 	    	right: 0px;
-	    	width: 200px;
+	    	width: 250px;
 			margin-bottom: -99999px;
 			padding-bottom: 99999px;
+			padding-left: 5px;
+			padding-right: 5px;
 	    }
 
 	    #players {
@@ -27,6 +30,21 @@
 	    }
 
 	    .player {
+	    	color: black;
+	    	background-color: white;
+	    	border-radius: 4px;
+	    	padding: 4px;
+	    	margin: 8px;
+	    }
+
+	    #games {
+			list-style: none;
+	    	margin: 0;
+	    	padding: 0;
+	    }
+
+	    .game {
+	    	color: black;
 	    	background-color: white;
 	    	border-radius: 4px;
 	    	padding: 4px;
@@ -103,9 +121,15 @@
   </div>
 
   <div class="g sidebar">
+  	<span>Active players</span>
     <ul id="players">
       <li class="player">Loading...</li>
     </ul>
+    <span>Active games</span>
+    <ul id="games">
+      <li class="game">Loading...</li>
+    </ul>
+
   </div>
 </div>
 </div>

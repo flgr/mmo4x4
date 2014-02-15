@@ -29,7 +29,7 @@ $(window).load(function() {
 			gamesDiv.empty();
 
 			games.forEach(function(game) {
-				gamesDiv.append("<div><span class='glyphicon glyphicon-send'> </span> " + game.name + "</div>");
+				gamesDiv.append("<li class='game'><span class='glyphicon glyphicon-send'> </span> " + game.name + "</li>");
 			})
 		});
 
