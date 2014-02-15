@@ -1,0 +1,50 @@
+@import "compass",
+        "vendor/bullgrid";
+* {
+    padding: 0;
+    margin: 0;
+    @include box-sizing(border-box);
+}
+
+.wrapper {
+    padding-top: 5em;
+}
+
+.board {
+    width: 100%;
+    max-width: 33em;
+    margin: 0 auto;
+}
+
+.cell__block {
+    width: 8em;
+    height: 8em;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #ccc;
+
+    @include breakpoint(small) {
+        width: 5em;
+        height: 5em;
+    }
+}
+
+.cell--marked {
+    background: #ddd;
+}
+
+.list {
+    width: 100%;
+    max-width: 30em;
+    background: #ddd;
+    border: 1px solid #ccc;
+}
+
+.list__player {
+
+}
+
+.list--players {
+
+}
+
