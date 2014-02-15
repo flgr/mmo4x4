@@ -1,11 +1,20 @@
-var nick = prompt("Your nick name, please?");
-
 $(window).load(function() {
 	console.info("Window load called");
 	var socket = io.connect('/');
 
+	var nickField = $('#nickName');
+	nickField.focus();
+
 	$('[data-js="start-new-game"]').on('click', function(e) {
 		socket.emit('new-game', { x: 5, y: 3 });
+	});
+
+	$('[data-js="join"]').on('click', function(e) {
+		e.preventDefault();
+		var nick = nickField.val();
+		socket.emit('join', { nick: nick });
+		// hide welcome element
+		$('.welcome').hide();
 	});
 
 	socket.on('connect', function (data) {
@@ -32,7 +41,5 @@ $(window).load(function() {
 				gamesDiv.append("<li class='game'><span class='glyphicon glyphicon-send'> </span> " + game.name + "</li>");
 			})
 		});
-
-		socket.emit('join', { nick: nick });
 	});
 });
