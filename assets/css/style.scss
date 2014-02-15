@@ -1,5 +1,21 @@
 @import "compass",
         "vendor/bullgrid";
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content
+    }
+    @-moz-keyframes #{$name} {
+        @content
+    }
+    @-ms-keyframes #{$name} {
+        @content
+    }
+    @keyframes #{$name} {
+        @content
+    }
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -12,12 +28,13 @@
 
 .board {
     margin: 0 auto;
+    max-width: 39em;
 }
 
 .cell__block {
     width: 4em;
     height: 4em;
-    display: inline-block;
+    float: left;
     background: linear-gradient(to bottom, #ffffff 0, #f0f0f0 100%);
     border: 1px solid #ccc;
 
@@ -29,6 +46,48 @@
 
 .cell--marked {
     background: linear-gradient(to bottom, #dfdfdf 0, #d0d0d0 100%);
+}
+
+.sidebar {
+    padding: 0;
+    padding-top: 50px;
+    color: white;
+    background-color: #222;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 250px;
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#players {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.player {
+    color: black;
+    background-color: white;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 8px;
+}
+
+#games {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.game {
+   color: black;
+   background-color: white;
+   border-radius: 4px;
+   padding: 4px;
+   margin: 8px;
 }
 
 .list {
@@ -46,3 +105,22 @@
 
 }
 
+.has-scored {
+   -webkit-animation: scored ease-out .4s;
+}
+
+@include keyframes(scored) {
+  0% {
+    background: transparent;
+    @include transform(scale(1));
+  }
+  
+  50% {
+    background: tint(#27ae60, 20%);
+    @include transform(scale(1.2));
+  }
+  
+  100% {
+   @include transform(scale(1));
+  }
+}
