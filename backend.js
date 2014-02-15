@@ -25,7 +25,7 @@ Server.prototype.onClientJoin = function(socket, data) {
     console.info("Added client " + socket.client.nick + " (" + socket.id + ")" +
         ". Now have " + Object.keys(this.clients).length);
     this.pushClientUpdate(socket, socket.client.nick);
-    //socket.emit("client update", this.clients, null);
+    socket.emit("client update", this.clients, null);
 };
 
 Server.prototype.onClientDisconnect = function(socket) {
@@ -47,4 +47,6 @@ io.sockets.on('connection', function(socket) {
             server.onClientDisconnect(socket);
 	    }
     });
+
+    socket.emit("connect");
 });
